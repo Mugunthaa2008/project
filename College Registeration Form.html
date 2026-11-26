@@ -1,0 +1,617 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agni college Registration</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f1f5f9;
+            color: #1e293b;
+            padding: 30px 15px;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: auto;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+        }
+
+        .header {
+            background: #12345a;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .header h1 {
+            font-size: 27px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #dbeafe;
+            font-size: 14px;
+        }
+
+        .form-content {
+            padding: 30px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            color: #12345a;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin: 25px 0 18px;
+        }
+
+        .section-title:first-child {
+            margin-top: 0;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        .required {
+            color: #dc2626;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+            background: white;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 85px;
+        }
+
+        .hint {
+            color: #64748b;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .declaration {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 18px;
+            margin-top: 20px;
+        }
+
+        .declaration p {
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-row input {
+            width: auto;
+            margin-top: 3px;
+        }
+
+        .checkbox-row label {
+            font-weight: normal;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        button {
+            padding: 13px 25px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background: #12345a;
+            color: white;
+            flex: 1;
+        }
+
+        .submit-btn:hover {
+            background: #1e4b7a;
+        }
+
+        .reset-btn {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+
+        .reset-btn:hover {
+            background: #cbd5e1;
+        }
+
+        #result {
+            display: none;
+            margin-top: 22px;
+            padding: 18px;
+            border-radius: 8px;
+            line-height: 1.6;
+        }
+
+        #result.success {
+            display: block;
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #86efac;
+        }
+
+        #result.error {
+            display: block;
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+
+        @media (max-width: 650px) {
+            .form-content {
+                padding: 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header class="header">
+        <h1>AGNI COLLEGE OF TECHNOLOGY</h1>
+        <p>Student Admission and Registration Form</p>
+        <p>Academic Year 2026 - 2027</p>
+    </header>
+
+    <main class="form-content">
+
+        <form id="registrationForm">
+
+            <!-- Admission Details -->
+            <h2 class="section-title">1. Admission Details</h2>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="level">Admission Level <span class="required">*</span></label>
+                    <select id="level" required>
+                        <option value="">Select Level</option>
+                        <option value="UG">Undergraduate (UG)</option>
+                        <option value="PG">Postgraduate (PG)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="department">Department <span class="required">*</span></label>
+                    <select id="department" required>
+                        <option value="">Select Department</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <!-- Student Details -->
+            <h2 class="section-title">2. Student Information</h2>
+
+            <div class="form-grid">
+
+                <div class="form-group full-width">
+                    <label for="studentName">Student Full Name <span class="required">*</span></label>
+                    <input type="text" id="studentName"
+                           placeholder="Enter full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="dob">Date of Birth <span class="required">*</span></label>
+                    <input type="date" id="dob" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="bloodGroup">Blood Group <span class="required">*</span></label>
+                    <select id="bloodGroup" required>
+                        <option value="">Select Blood Group</option>
+                        <option>A+</option>
+                        <option>A-</option>
+                        <option>B+</option>
+                        <option>B-</option>
+                        <option>O+</option>
+                        <option>O-</option>
+                        <option>AB+</option>
+                        <option>AB-</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="studentMobile">Student Mobile Number <span class="required">*</span></label>
+                    <input type="tel" id="studentMobile"
+                           placeholder="10-digit mobile number"
+                           pattern="[6-9][0-9]{9}"
+                           maxlength="10" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="studentEmail">Student Email Address <span class="required">*</span></label>
+                    <input type="email" id="studentEmail"
+                           placeholder="example@gmail.com" required>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="address">Residential Address <span class="required">*</span></label>
+                    <textarea id="address"
+                              placeholder="Enter your full address" required></textarea>
+                </div>
+
+            </div>
+
+            <!-- Parent Details -->
+            <h2 class="section-title">3. Parent / Guardian Information</h2>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="fatherName">Father's Name <span class="required">*</span></label>
+                    <input type="text" id="fatherName"
+                           placeholder="Enter father's name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="motherName">Mother's Name <span class="required">*</span></label>
+                    <input type="text" id="motherName"
+                           placeholder="Enter mother's name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="fatherMobile">Father's Mobile Number <span class="required">*</span></label>
+                    <input type="tel" id="fatherMobile"
+                           placeholder="10-digit mobile number"
+                           pattern="[6-9][0-9]{9}"
+                           maxlength="10" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="motherMobile">Mother's Mobile Number</label>
+                    <input type="tel" id="motherMobile"
+                           placeholder="10-digit mobile number"
+                           pattern="[6-9][0-9]{9}"
+                           maxlength="10">
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="guardianName">Guardian's Name (if applicable)</label>
+                    <input type="text" id="guardianName"
+                           placeholder="Enter guardian's name">
+                </div>
+
+            </div>
+
+            <!-- Academic Details -->
+            <h2 class="section-title">4. Academic Information</h2>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="tenth">10th Standard Percentage <span class="required">*</span></label>
+                    <input type="number" id="tenth"
+                           min="0" max="100" step="0.01"
+                           placeholder="Example: 90.50" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="twelfth">12th Standard Percentage <span class="required">*</span></label>
+                    <input type="number" id="twelfth"
+                           min="0" max="100" step="0.01"
+                           placeholder="Example: 85.50" required>
+                </div>
+
+                <div class="form-group full-width" id="degreeGroup" hidden>
+                    <label for="degree">Qualifying Degree Percentage <span class="required">*</span></label>
+                    <input type="number" id="degree"
+                           min="0" max="100" step="0.01"
+                           placeholder="Enter degree percentage">
+                    <span class="hint">Required for PG applicants.</span>
+                </div>
+
+            </div>
+
+            <!-- Declaration -->
+            <h2 class="section-title">5. Declaration and Signatures</h2>
+
+            <div class="declaration">
+
+                <p>
+                    I hereby declare that all the information provided in this
+                    registration form is true and correct to the best of my
+                    knowledge. I understand that providing incorrect information
+                    may result in cancellation of admission.
+                </p>
+
+                <div class="checkbox-row">
+                    <input type="checkbox" id="declaration" required>
+                    <label for="declaration">
+                        I agree to the above declaration and confirm that the
+                        information provided is correct.
+                        <span class="required">*</span>
+                    </label>
+                </div>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="studentSignature">Student Signature (Type Full Name) <span class="required">*</span></label>
+                        <input type="text" id="studentSignature"
+                               placeholder="Student's full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="parentSignature">Parent Signature (Type Full Name) <span class="required">*</span></label>
+                        <input type="text" id="parentSignature"
+                               placeholder="Parent's full name" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="guardianSignature">Guardian Signature (if applicable)</label>
+                        <input type="text" id="guardianSignature"
+                               placeholder="Guardian's full name">
+                    </div>
+
+                </div>
+
+                <p class="hint">
+                    Note: These fields collect typed names as signature acknowledgements,
+                    not handwritten or legally verified digital signatures.
+                </p>
+
+            </div>
+
+            <!-- Buttons -->
+            <div class="buttons">
+
+                <button type="submit" class="submit-btn">
+                    Submit Registration
+                </button>
+
+                <button type="reset" class="reset-btn">
+                    Clear Form
+                </button>
+
+            </div>
+
+            <div id="result" role="status" aria-live="polite"></div>
+
+        </form>
+
+    </main>
+</div>
+
+<script>
+    // Select HTML elements
+    const level = document.getElementById("level");
+    const department = document.getElementById("department");
+    const degreeGroup = document.getElementById("degreeGroup");
+    const degree = document.getElementById("degree");
+    const form = document.getElementById("registrationForm");
+    const result = document.getElementById("result");
+
+    // Department options based on admission level
+    const departments = {
+        UG: [
+            "Computer Science and Engineering",
+            "Information Technology",
+            "Electronics and Communication Engineering",
+            "Electrical and Electronics Engineering",
+            "Mechanical Engineering",
+            "Civil Engineering",
+            "Artificial Intelligence and Data Science",
+            "Artificial Intelligence and Machine Learning"
+        ],
+        PG: [
+            "M.E. Computer Science and Engineering",
+            "M.E. VLSI Design",
+            "M.E. Structural Engineering",
+            "M.E. Power Systems Engineering",
+            "M.Tech. Artificial Intelligence",
+            "Master of Computer Applications (MCA)",
+            "Master of Business Administration (MBA)"
+        ]
+    };
+
+    // Change departments when UG or PG is selected
+    level.addEventListener("change", function () {
+
+        department.innerHTML =
+            '<option value="">Select Department</option>';
+
+        const selectedLevel = level.value;
+
+        if (departments[selectedLevel]) {
+            departments[selectedLevel].forEach(function (dept) {
+
+                const option = document.createElement("option");
+
+                option.value = dept;
+                option.textContent = dept;
+
+                department.appendChild(option);
+            });
+        }
+
+        // Show degree percentage only for PG
+        const isPG = selectedLevel === "PG";
+
+        degreeGroup.hidden = !isPG;
+        degree.required = isPG;
+
+        // Reset old result
+        result.className = "";
+        result.textContent = "";
+    });
+
+    // Handle form submission
+    form.addEventListener("submit", function (event) {
+
+        // Prevent page reload
+        event.preventDefault();
+
+        // Get student details
+        const name = document.getElementById("studentName").value.trim();
+        const email = document.getElementById("studentEmail").value.trim();
+        const mobile = document.getElementById("studentMobile").value;
+        const fatherMobile = document.getElementById("fatherMobile").value;
+        const motherMobile = document.getElementById("motherMobile").value;
+        const selectedLevel = level.value;
+        const selectedDepartment = department.value;
+
+        const tenth = Number(document.getElementById("tenth").value);
+        const twelfth = Number(document.getElementById("twelfth").value);
+        const degreeMark = Number(degree.value);
+
+        // Check percentage values
+        if (
+            tenth < 0 || tenth > 100 ||
+            twelfth < 0 || twelfth > 100
+        ) {
+            showError("Please enter valid academic percentages between 0 and 100.");
+            return;
+        }
+
+        if (selectedLevel === "PG" &&
+            (degree.value === "" || degreeMark < 0 || degreeMark > 100)) {
+            showError("Please enter a valid qualifying degree percentage.");
+            return;
+        }
+
+        // Check duplicate mobile numbers
+        if (
+            mobile === fatherMobile ||
+            (motherMobile !== "" && mobile === motherMobile)
+        ) {
+            showError("Student and parent mobile numbers must be different.");
+            return;
+        }
+
+        // Show success message
+        result.className = "success";
+
+        result.innerHTML =
+            "<strong>Registration submitted successfully!</strong><br><br>" +
+            "Student Name: " + escapeHTML(name) + "<br>" +
+            "Email: " + escapeHTML(email) + "<br>" +
+            "Admission Level: " + escapeHTML(selectedLevel) + "<br>" +
+            "Department: " + escapeHTML(selectedDepartment) + "<br><br>" +
+            "Your details have passed the form validation.";
+
+        result.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+
+    // Display validation errors
+    function showError(message) {
+        result.className = "error";
+        result.textContent = message;
+        result.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    // Safely display user-entered text
+    function escapeHTML(value) {
+        return value.replace(/[&<>"']/g, function (character) {
+            const entities = {
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;"
+            };
+
+            return entities[character];
+        });
+    }
+
+    // Clear previous result when the form is reset
+    form.addEventListener("reset", function () {
+        setTimeout(function () {
+            department.innerHTML =
+                '<option value="">Select Department</option>';
+
+            degreeGroup.hidden = true;
+            degree.required = false;
+
+            result.className = "";
+            result.textContent = "";
+        }, 0);
+    });
+
+</script>
+
+</body>
+</html>
