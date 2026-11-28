@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Mark Calculator</title>
+</head>
+<body>
+
+    <h1>Student Mark Calculation System</h1>
+
+    <!-- Student Details -->
+    <label>Student Name:</label>
+    <input type="text" id="name" placeholder="Enter your name">
+
+    <br><br>
+
+    <label>OOPS:</label>
+    <input type="number" id="m1" placeholder="Enter mark">
+
+    <br><br>
+
+    <label>Python:</label>
+    <input type="number" id="m2" placeholder="Enter mark">
+
+    <br><br>
+
+    <label>Database Management:</label>
+    <input type="number" id="m3" placeholder="Enter mark">
+
+    <br><br>
+
+    <label>Web Development:</label>
+    <input type="number" id="m4" placeholder="Enter mark">
+
+    <br><br>
+
+    <label>UI/UX:</label>
+    <input type="number" id="m5" placeholder="Enter mark">
+
+    <br><br>
+
+    <button id="calculateBtn">Calculate Result</button>
+
+    <h2>Student Result</h2>
+    <pre id="result"></pre>
+
+    <script>
+
+        // 1. VARIABLES
+        const studentCollege = "Agni College of Technology";
+
+        // 2. FUNCTION
+        function calculateResult() {
+
+            // Getting values from HTML
+            let name = document.getElementById("name").value;
+
+            let mark1 = Number(document.getElementById("m1").value);
+            let mark2 = Number(document.getElementById("m2").value);
+            let mark3 = Number(document.getElementById("m3").value);
+            let mark4 = Number(document.getElementById("m4").value);
+            let mark5 = Number(document.getElementById("m5").value);
+
+            // 3. ARRAY
+            let marks = [mark1, mark2, mark3, mark4, mark5];
+
+            // 4. CONDITIONAL STATEMENT
+            if (name.trim() === "" ||
+                [document.getElementById("m1").value,
+                 document.getElementById("m2").value,
+                 document.getElementById("m3").value,
+                 document.getElementById("m4").value,
+                 document.getElementById("m5").value].some(value => value === "")) {
+
+                document.getElementById("result").textContent =
+                    "Please enter all student details and marks.";
+
+                return;
+            }
+
+            for (let mark of marks) {
+                if (!Number.isFinite(mark) || mark < 0 || mark > 100) {
+                    document.getElementById("result").textContent =
+                        "Please enter marks between 0 and 100.";
+                    return;
+                }
+            }
+
+            let total = 0;
+
+            for (let i = 0; i < marks.length; i++) {
+                total = total + marks[i];
+            }
+
+            
+            let percentage = total / marks.length;
+
+            
+            let passed = true;
+
+            
+            for (let mark of marks) {
+                if (mark < 35) {
+                    passed = false;
+                }
+            }
+
+            let grade;
+
+            if (percentage >= 90) {
+                grade = "A Grade";
+            }
+            else if (percentage >= 75) {
+                grade = "B Grade";
+            }
+            else if (percentage >= 50) {
+                grade = "C Grade";
+            }
+            else {
+                grade = "D Grade";
+            }
+
+
+            let output = "";
+
+            output += "College: " + studentCollege + "\n";
+            output += "Student Name: " + name + "\n";
+            output += "Subject Marks:\n";
+
+            for (let i = 0; i < marks.length; i++) {
+                output += "Subject " + (i + 1) + ": " + marks[i] + "\n";
+            }
+
+            output += "Total Marks: " + total + "/500\n";
+            output += "Percentage: " + percentage + "%\n";
+            output += "Grade: " + grade + "\n";
+
+            if (passed) {
+                output += "Result: PASS";
+            }
+            else {
+                output += "Result: FAIL";
+            }
+
+            document.getElementById("result").textContent = output;
+        }
+        document.getElementById("calculateBtn")
+            .addEventListener("click", calculateResult);
+
+    </script>
+
+</body>
+</html>
